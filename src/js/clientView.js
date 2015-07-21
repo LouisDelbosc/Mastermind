@@ -3,7 +3,7 @@ import Peer from 'peerjs';
 import { PeerServer } from 'peerjs';
 import Client from './client';
 
-var ClientView = React.createClass({
+class ClientView extends React.component {
 
   getInitialState() {
     var peer = new Peer( {host: 'localhost', port: 9000} );
@@ -12,25 +12,25 @@ var ClientView = React.createClass({
       peer: peer,
       chan: chan
     };
-  },
+  }
 
   connection() {
     var dest = document.getElementById('name').value;
     this.state.chan.addPeer(dest);
-  },
+  }
 
   sendMessage() {
     var message = document.getElementById('toSend').value;
     this.state.chan.sendMessage(message);
-  },
+  }
 
   disconnect(){
     this.state.chan.disconnect();
-  },
+  }
 
   componentDidMount(){
     this.state.chan.init();
-  },
+  }
 
   render() {
     return (
@@ -42,8 +42,8 @@ var ClientView = React.createClass({
         <button onClick={this.sendMessage} >Send</button>
         <button onClick={this.disconnect} >deco</button>
       </div>
-    );
+    )
   }
-});
+}
 
-module.exports = ClientView;
+export default ClientView;
