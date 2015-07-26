@@ -21,7 +21,7 @@ class Client {
    */
   init() {
     this.myPeer.on('open', function(id){
-      var div = document.getElementById('idclient');
+      var div = document.getElementById('moi');
       var titre = document.createElement('h3');
       var text = document.createTextNode(id);
       titre.appendChild(text);

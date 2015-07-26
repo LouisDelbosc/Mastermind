@@ -3,14 +3,14 @@ import Peer from 'peerjs';
 import { PeerServer } from 'peerjs';
 import Client from './client';
 
-class ClientView extends React.component {
+class ClientView extends React.Component {
 
-  getInitialState() {
+  constructor() {
+    super();
     var peer = new Peer( {host: 'localhost', port: 9000} );
-    var chan = new Client(peer);
-    return {
+    this.state =  {
       peer: peer,
-      chan: chan
+      chan: new Client(peer)
     };
   }
 
@@ -24,8 +24,12 @@ class ClientView extends React.component {
     this.state.chan.sendMessage(message);
   }
 
-  disconnect(){
+  disconnect() {
     this.state.chan.disconnect();
+  }
+
+  componentWillUnmount() {
+    this.disconnect();
   }
 
   componentDidMount(){
